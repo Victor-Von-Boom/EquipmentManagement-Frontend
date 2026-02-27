@@ -8,7 +8,6 @@
 
     border-radius: var(--radius-sm);
     box-shadow: 5px 0px 5px var(--color-shadow);
-
 }
 
 .equipment-sidebar-link {
@@ -19,8 +18,6 @@
     align-items: center;
 
     background-color: var(--color-secondary);
-
-
 }
 
 .equipment-active {

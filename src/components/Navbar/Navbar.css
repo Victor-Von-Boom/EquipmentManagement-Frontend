@@ -54,7 +54,7 @@
 }
 
 .navlink:hover {
-    background-color: var(--color-hover);
+    /* background-color: var(--color-hover); */
     transform: scale(1.1);
 }
 

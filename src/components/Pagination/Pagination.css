@@ -1,0 +1,5 @@
+.active-btn{
+    font-weight: bold;
+    color: var(--color-text);
+    box-shadow: 5px 5px 5px var(--color-shadow);
+}

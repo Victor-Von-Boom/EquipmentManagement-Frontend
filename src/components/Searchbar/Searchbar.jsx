@@ -20,7 +20,7 @@ export const Searchbar = ({ search, onSearch }) => {
             <input type="search" value={localInput} placeholder="Search" onChange={(e) => {
                 setLocalInput(e.target.value);
             }} />
-            <button type="submit">Submit</button>
+            <button type="submit" className="btn">Submit</button>
         </form>
     );
 }

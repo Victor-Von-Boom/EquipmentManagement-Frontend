@@ -1,4 +1,9 @@
-
+.btn{
+    background-color: var(--color-secondary);
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
+    border-radius: var(--radius-sm);
+}
 
 .searchbar-form{
     display: flex;

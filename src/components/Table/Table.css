@@ -8,7 +8,8 @@ table {
 }
 
 thead {
-    background-color: var(--color-secondary);
+    background-color: var(--color-table-head);
+    
 }
 
 
@@ -16,8 +17,25 @@ thead {
 th, td{
     text-align: left;
     padding: 4px;
+    
+}
+
+th > button {
+    color: var(--color-table-head-text);
+}
+
+tbody > tr {
+    background-color: var(--color-table-odd-rows);
 }
 
 tbody > tr:nth-child(even) {
-    background-color: var(--color-secondary);
+    background-color: var(--color-table-even-rows);
+}
+
+tbody > tr:nth-child(even):hover{
+    background-color: var(--color-hover-even-rows);
+}
+
+tbody > tr:nth-child(odd):hover{
+    background-color: var(--color-hover-odd-rows);
 }

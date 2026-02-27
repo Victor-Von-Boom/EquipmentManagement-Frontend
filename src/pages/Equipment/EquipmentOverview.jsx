@@ -114,7 +114,7 @@ const EquipmentOverview = () => {
             {loading && <p>Loading...</p>}
             {errorState && <p>{errorMessage}</p>}
             {!loading && !errorState &&
-                <div className='search-table-contaier'>
+                <div className='search-table-pagintation-container'>
                     <div className='dropdown-search-container'>
                         <Dropdown
                             selectedCategory={query.category}
@@ -123,7 +123,7 @@ const EquipmentOverview = () => {
                         <Searchbar
                             search={query.searchString}
                             onSearch={handleSearch} />
-                        <button type='button' onClick={handleReset} className='reset-filters-button'>Reset Filters</button>
+                        <button type='button' onClick={handleReset} className='btn'>Reset Filters</button>
                     </div>
                     <div>
                         <Table

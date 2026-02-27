@@ -1,12 +1,23 @@
 
 :root {
   /* ===== Colors ===== */
-  --color-primary: #265bcd;
+  --color-primary: #162e64;
+  
   --color-secondary: #b0bde1;
+
+  --color-table-head: #415389;
+
+  --color-table-head-text: rgb(209, 219, 224);
+
+  --color-table-odd-rows: #c6d0d483;
+
+  --color-table-even-rows: #5f88c586;
 
   --color-shadow: #cacdd8;
 
-  --color-hover: #3fa9ef;
+  --color-hover-odd-rows: #c6d0d4e1;
+
+  --color-hover-even-rows: #5f88c54e;
 
   --color-active: #3528e7;
 

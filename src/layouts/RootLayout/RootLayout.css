@@ -1,6 +1,9 @@
 .content-container {
     display: flex;
     gap: 1rem;
-    padding: 1rem;
+    padding-left: var(--space-md);
+    padding-right: var(--space-lg);
+    /* padding-bottom: var(--space-md); */
     background-color: var(--color-bg);
+    flex:1;
 }
