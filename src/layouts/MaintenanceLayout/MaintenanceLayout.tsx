@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 
-import Sidebar from "../../components/Sidebar/Sidebar";
+import { Sidebar } from "../../components/Sidebar/Sidebar";
 
 import './MaintenanceLayout.css';
 

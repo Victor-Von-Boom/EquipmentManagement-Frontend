@@ -1,8 +1,6 @@
-import React from "react";
+import { Outlet } from "react-router-dom";
 
-import { Link, NavLink, Outlet } from "react-router-dom";
-
-import Navbar from "../../components/Navbar/Navbar";
+import { Navbar } from "../../components/Navbar/Navbar";
 
 import './RootLayout.css';
 

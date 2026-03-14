@@ -2,12 +2,14 @@ import React from "react";
 
 import "./Sidebar.css"
 
-function Sidebar({children}) {
+interface SidebarProps {
+    children: React.ReactNode
+}
+
+export const Sidebar = ({children}: SidebarProps) => {
     return(
         <aside className="sidebar-container">
             {children}
         </aside>
     );
 }
-
-export default Sidebar

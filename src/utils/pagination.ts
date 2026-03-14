@@ -1,6 +1,6 @@
 
 
-export const getPagesToShow = (currentPage, totalPages) => {
+export const getPagesToShow = (currentPage: number, totalPages: number): (string | number)[] => {
         const delta = 1;
         const range = [];
 

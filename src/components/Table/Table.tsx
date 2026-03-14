@@ -1,14 +1,22 @@
-import React from "react";
-
 import { capitalize } from "../../utils/stringUtils";
+
+import type { Equipment } from "../../types/EquipmentTypes";
 
 import './Table.css'
 
-export const Table = ({ data, sortBy, sortOrder, onSort }) => {
+
+interface TableProps {
+    data: Equipment[],
+    sortBy: string,
+    sortOrder: "ASC" | "DESC",
+    headers: string[],
+    onSort: (value: string) => void
+}
+
+export const Table = ({ data, sortBy, sortOrder, headers, onSort }: TableProps) => {
 
     const rows = Array.isArray(data) ? data : [data];
-    const headers = rows.length > 0 ? Object.keys(rows[0]) : [];
-
+    
     return (
         <table >
             <thead >
@@ -31,7 +39,7 @@ export const Table = ({ data, sortBy, sortOrder, onSort }) => {
                     <tr key={rowIndex}>
                         {headers.map((header) => (
                             <td key={header}>
-                                {row[header]}
+                                {row[header as keyof Equipment]}
                             </td>
                         ))}
                     </tr>

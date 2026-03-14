@@ -1,8 +1,12 @@
-import React from "react";
-
 import './Pagination.css'
 
-export const Pagination = ({ currentPage, pages, onPageSelect }) => {
+interface PaginationProps {
+    currentPage: number,
+    pages: (string | number)[],
+    onPageSelect: (value: number) => void
+}
+
+export const Pagination = ({ currentPage, pages, onPageSelect }: PaginationProps) => {
     return (
         <>
             {pages.map((page, index) => (
@@ -11,7 +15,7 @@ export const Pagination = ({ currentPage, pages, onPageSelect }) => {
                     : <button
                         type="button"
                         key={`page-${page}`}
-                        onClick={(e) => { onPageSelect(page) }}
+                        onClick={(e) => { typeof page === 'number' && onPageSelect(page) }}
                         className={`${page === currentPage ? 'btn active-btn' : 'btn'}`}
                         disabled={page === currentPage}>
                         {page}

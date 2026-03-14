@@ -1,11 +1,10 @@
-import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faScrewdriverWrench } from "@fortawesome/free-solid-svg-icons";
-
-import './Navbar.css';
 import { Link, NavLink } from "react-router-dom";
 
-function Navbar() {
+import './Navbar.css';
+
+export const Navbar = () => {
     return (
         <div className="navbar-container">
             <Link className="navbar-icon-container" to={'/dashboard'}><FontAwesomeIcon icon={faScrewdriverWrench} /></Link>
@@ -17,5 +16,3 @@ function Navbar() {
         </div>
     );
 }
-
-export default Navbar

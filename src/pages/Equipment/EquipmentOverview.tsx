@@ -1,4 +1,3 @@
-import { readEquipment, getFilterPagedEquipment } from '../../services/EquipmentApi';
 import { useState, useEffect, useMemo } from 'react';
 
 import { Searchbar } from '../../components/Searchbar/Searchbar';
@@ -6,45 +5,52 @@ import { Dropdown } from '../../components/Dropdown/Dropdown';
 import { Table } from '../../components/Table/Table'
 import { Pagination } from '../../components/Pagination/Pagination';
 
-import './Equipment.css';
-import { data } from 'react-router-dom';
+import { getFilterPagedEquipment } from '../../services/EquipmentApi';
 import { getPagesToShow } from '../../utils/pagination';
 
-const DEFAULT_QUERY = {
+import type { QueryParams } from '../../types/EquipmentTypes';
+import type { PagedEquipment, Equipment } from '../../types/EquipmentTypes';
+
+import './Equipment.css';
+
+
+const DEFAULT_QUERY: QueryParams = {
     category: "id",
     searchString: "",
     sortBy: "id",
     sortOrder: "ASC",
-    page: 1
+    page: 1,
+    pageCount: 20
 }
 
-const EquipmentOverview = () => {
-    const [equipment, setEquipment] = useState([]);
-    const [headers, setHeaders] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [errorState, setErrorState] = useState(false)
-    const [errorMessage, setErrorMessage] = useState("");
-    const [query, setQuery] = useState(DEFAULT_QUERY);
-    const [currentPage, setCurrentPage] = useState(DEFAULT_QUERY.page);
-    const [totalPages, setTotalPages] = useState(DEFAULT_QUERY.page);
+const DEFAULT_HEADERS: string[] = ['id', 'category', 'type', 'manufacturer', 'model', 'sn'];
+
+function EquipmentOverview() {
+    const [equipment, setEquipment] = useState<Equipment[]>([]);
+    const [headers, setHeaders] = useState<string[]>(DEFAULT_HEADERS);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [errorState, setErrorState] = useState<boolean>(false)
+    const [errorMessage, setErrorMessage] = useState<string>("");
+    const [query, setQuery] = useState<QueryParams>(DEFAULT_QUERY);
+    const [currentPage, setCurrentPage] = useState<number>(DEFAULT_QUERY.page);
+    const [totalPages, setTotalPages] = useState<number>(DEFAULT_QUERY.page);
 
     useEffect(() => {
 
         const fetchData = async () => {
             try {
-                const data = await getFilterPagedEquipment(query);
+                const data : PagedEquipment = await getFilterPagedEquipment(query);
                 if (data && data.list.length > 0) {
                     setEquipment(data.list);
                     setCurrentPage(data.currentPage);
                     setTotalPages(data.totalPages);
-                    setHeaders(Object.keys(data.list[0]));
                 }
                 else {
                     setEquipment([]);
                 }
             } catch (error) {
                 setErrorState(true)
-                setErrorMessage(error.message)
+                setErrorMessage(error instanceof Error ? error.message : "Unknown Error")
             }
             finally {
                 setLoading(false);
@@ -53,19 +59,18 @@ const EquipmentOverview = () => {
         fetchData();
     }, [query]);
 
-    const handleSearch = (value) => {
+    const handleSearch = (searchString: string) => {
         setQuery(prev => ({
             ...prev,
-            searchString: value,
+            searchString: searchString,
             page: 1
         }));
-        console.log(query.searchString);
     };
 
-    const handleCategory = (value) => {
+    const handleCategory = (category: string) => {
         setQuery(prev => ({
             ...prev,
-            category: value
+            category: category
         }));
     }
 
@@ -74,23 +79,23 @@ const EquipmentOverview = () => {
 
     }
 
-    const handlePageRequest = (value) => {
+    const handlePageRequest = (page: number) => {
         setQuery(prev => ({
             ...prev,
-            page: value
+            page: page
         }));
     }
 
-    const handleSort = (value) => {
+    const handleSort = (sortBy: string) => {
         setQuery(prev => ({
             ...prev,
-            sortBy: value,
-            sortOrder: prev.sortBy === value && prev.sortOrder === "ASC" ? "DESC" : "ASC",
+            sortBy: sortBy,
+            sortOrder: prev.sortBy === sortBy && prev.sortOrder === "ASC" ? "DESC" : "ASC",
             page: 1
         }))
     }
 
-    const pagesToShow = useMemo( () => getPagesToShow(currentPage, totalPages), [currentPage, totalPages]);
+    const pagesToShow = useMemo(() => getPagesToShow(currentPage, totalPages), [currentPage, totalPages]);
 
     return (
         <div className='equipment-main-content'>
@@ -102,7 +107,7 @@ const EquipmentOverview = () => {
                         <Dropdown
                             selectedCategory={query.category}
                             categories={headers}
-                            onSelect={handleCategory} />
+                            onSelect={handleCategory}/>
                         <Searchbar
                             search={query.searchString}
                             onSearch={handleSearch} />
@@ -113,6 +118,7 @@ const EquipmentOverview = () => {
                             data={equipment}
                             sortBy={query.sortBy}
                             sortOrder={query.sortOrder}
+                            headers={headers}
                             onSort={handleSort} />
                     </div>
 

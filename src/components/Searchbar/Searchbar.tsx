@@ -1,10 +1,13 @@
-import React from "react";
 import { useState, useEffect } from "react";
-
 
 import './Searchbar.css'
 
-export const Searchbar = ({ search, onSearch }) => {
+interface SearchProps {
+    search: string,
+    onSearch: (value: string) => void
+}
+
+export const Searchbar = ({ search, onSearch }: SearchProps) => {
 
     const [localInput, setLocalInput] = useState(search || "");
 
@@ -17,12 +20,10 @@ export const Searchbar = ({ search, onSearch }) => {
             e.preventDefault();
             onSearch(localInput);
         }}>
-            <input type="search" value={localInput} placeholder="Search" onChange={(e) => {
+            <input className="searchbar-input" type="search" value={localInput} placeholder="Search" onChange={(e) => {
                 setLocalInput(e.target.value);
             }} />
             <button type="submit" className="btn">Submit</button>
         </form>
     );
 }
-
-// export default Searchbar;
